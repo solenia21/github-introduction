@@ -1,7 +1,31 @@
 ---
-title: "Analysis 1"
+title: "A Beautiful Graphic"
 author: Solenia Suarez
 format: html
+execute:
+  echo: false
 ---
 
-Solenia is a data maestro!
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3, alpha = 0.85) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) +
+  scale_color_viridis_d(option = "C", name = "Cylinders") +
+  labs(
+    title = "The Weight of Efficiency",
+    subtitle = "Heavier cars tend to travel fewer miles per gallon",
+    x = "Weight (1,000 lb)",
+    y = "Fuel efficiency (mpg)",
+    caption = "Each point is a car in the built-in mtcars dataset"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+```
